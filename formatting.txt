@@ -1,0 +1,3 @@
+header - bold
+regular text - standard
+notes - bold + italicized 
