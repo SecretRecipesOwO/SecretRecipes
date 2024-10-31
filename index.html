@@ -84,6 +84,25 @@
             color: red;
             text-align: center;
         }
+        /* Dropdown styling */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border: 1px solid #444;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -102,10 +121,10 @@
             <h2>Menu</h2>
             <a href="recipes/recipe1.html">Crème Brûwûlée</a>
             <a href="recipes/recipe2.html">Lemowon Meringuwue Cheesecake</a>
-            <a href="recipes/recipe3.html">Hjówònabandssæla </a>
+            <a href="recipes/recipe3.html">Hjówònabandssæla</a>
             <a href="recipes/recipe4.html">Italian Mixed Berry Mascarpowone Cake</a>
             <a href="recipes/recipe5.html">KvæfjOwOrdkake</a>
-            <a href="recipes/recipe6.html">Prăjitură CUwU Foi</a>
+            <a href="#" id="prajituraLink">PrăjitUwUră</a>
         </div>
     </div>
     <div class="other-container">
@@ -115,6 +134,11 @@
             <a href="additional/solid-item-weight.html">Solid Weights</a>
             <a href="additional/my-socials.html">My Socials :3</a>
         </div>
+    </div>
+    <!-- Dropdown Menu for Prăjitură -->
+    <div class="dropdown-content" id="prajituraDropdown">
+        <a href="recipes/recipe6.html">Prăjitură cUwU Foi</a>
+        <a href="recipes/recipe7.html">PrăjitUwUră Albă ca Zăpada</a>
     </div>
     <script>
         if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -134,6 +158,25 @@
             } else {
                 result.textContent = 'Incorrect password. Please try again.';
             }
+        });
+
+        document.getElementById('prajituraLink').addEventListener('mouseenter', function() {
+            const dropdown = document.getElementById('prajituraDropdown');
+            const linkRect = this.getBoundingClientRect();
+            dropdown.style.display = 'block';
+            dropdown.style.top = `${linkRect.top}px`;
+            dropdown.style.left = `${linkRect.right}px`;
+        });
+
+        document.getElementById('prajituraDropdown').addEventListener('mouseleave', function() {
+            this.style.display = 'none';
+        });
+        document.getElementById('prajituraLink').addEventListener('mouseleave', function(event) {
+            setTimeout(() => {
+                if (!event.relatedTarget || !event.relatedTarget.closest('#prajituraDropdown')) {
+                    document.getElementById('prajituraDropdown').style.display = 'none';
+                }
+            }, 50);
         });
     </script>
 </body>
