@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Book</title>
     <style>
-        
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -17,39 +16,44 @@
             height: 100vh;
             background-color: #f0f0f0;
         }
-        .menu-container {
+        .menu-container, .other-container {
             display: none;
         }
-        .menu {
-            width: 15%;
+        .menu, .other {
+            width: 16%;
             height: 100vh;
             background-color: #333;
             color: white;
             overflow-y: auto;
             position: fixed;
             top: 0;
-            left: 0;
             padding: 20px;
             box-sizing: border-box;
         }
-        .menu h2 {
+        .menu {
+            left: 0;
+        }
+        .other {
+            right: 0;
+        }
+        .menu h2, .other h2 {
             text-align: center;
             margin-bottom: 20px;
         }
-        .menu a {
+        .menu a, .other a {
             display: block;
             color: white;
             padding: 10px 0;
             text-decoration: none;
             border-bottom: 1px solid #444;
         }
-        .menu a:hover {
+        .menu a:hover, .other a:hover {
             background-color: #555;
         }
         .content {
-            margin-left: 10%;
+            margin: 0 10%;
             padding: 20px;
-            width: 90%;
+            width: 80%;
         }
         .login-form {
             background-color: white;
@@ -104,19 +108,29 @@
             <a href="recipes/recipe6.html">Prăjitură CUwU Foi</a>
         </div>
     </div>
+    <div class="other-container">
+        <div class="other">
+            <h2>Other</h2>
+            <a href="additional/fluid-item-weight.html">Fluid Weights</a>
+            <a href="additional/solid-item-weight.html">Solid Weights</a>
+            <a href="additional/my-socials.html">My Socials :3</a>
+        </div>
+    </div>
     <script>
         if (localStorage.getItem('isLoggedIn') === 'true') {
             document.getElementById('loginForm').style.display = 'none';
             document.querySelector('.menu-container').style.display = 'flex';
+            document.querySelector('.other-container').style.display = 'flex';
         }
         document.getElementById('passwordForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var password = document.getElementById('password').value;
             var result = document.getElementById('result');
-            if (password === 'I Am Fag') {
+            if (password === 'I Am Gay') {
                 localStorage.setItem('isLoggedIn', 'true');
                 document.getElementById('loginForm').style.display = 'none';
                 document.querySelector('.menu-container').style.display = 'flex';
+                document.querySelector('.other-container').style.display = 'flex';
             } else {
                 result.textContent = 'Incorrect password. Please try again.';
             }
