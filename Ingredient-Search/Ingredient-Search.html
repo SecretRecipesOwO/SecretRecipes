@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Recipes</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        /* Left Menu */
+        .menu {
+            width: 16%;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .menu h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .menu input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            padding: 0;
+            font-size: 18px;
+            border-bottom: 0px solid #444;
+        }
+        .menu a {
+            display: block;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #444;
+        }
+        .menu a:hover {
+            background-color: #555;
+        }
+        /* Hidden class for search filtering */
+        .hidden {
+            display: none;
+        }
+        /* Right Menu */
+        .right-menu {
+            width: 16%;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .right-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .right-menu a {
+            display: block;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #444;
+        }
+        .right-menu a:hover {
+            background-color: #555;
+        }
+        /* Main Content */
+        .content {
+            margin-left: 18%;
+            margin-right: 18%;
+            padding: 20px;
+            width: 64%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side Menu -->
+        <div class="menu">
+            <h2>Ingredient Recipes</h2>
+            <input type="text" id="recipeSearch" placeholder="Search recipes...">
+            <ul id="recipeList" class="ingredient-list">
+                <li><a href="Ingredients/Ing1.html">Berry Syrup</a></li>
+                <li><a href="Ingredients/Ing2.html">Berry Extract</a></li>
+                <li><a href="Ingredients/Ing3.html">Lemon Curd</a></li>
+                <li><a href="Ingredients/Ing4.html">Meringue</a></li>
+                <li><a href="Ingredients/Ing5.html">Vanilla Cream</a></li>
+            </ul>
+        </div>
+
+        <!-- Right Side Menu -->
+        <div class="right-menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../additional/fluid-item-weight.html">Fluid conversions</a></li>
+                <li><a href="../additional/solid-item-weight.html">Solid conversions</a></li>
+                <li><a href="../additional/my-socials.html">My socials :3</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        // Search filter for recipe menu
+        document.getElementById('recipeSearch').addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+            const recipes = document.querySelectorAll('#recipeList li');
+
+            recipes.forEach(recipe => {
+                const text = recipe.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    recipe.classList.remove('hidden');
+                } else {
+                    recipe.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
