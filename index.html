@@ -102,6 +102,12 @@
             margin-top: 0;
         }
 
+        .dietary-requirements {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
         /* Prăjitura Dropdown */
         .dropdown-content {
             display: none;
@@ -155,6 +161,7 @@
             <div id="recipeDescription" class="recipe-description">
                 <h3 id="recipeTitle">Recipe Title</h3>
                 <p id="recipeText">Hover over a recipe to see the description.</p>
+                <p id="dietaryRequirements" class="dietary-requirements">Dietary requirements: N/A</p>
             </div>
         </div>
     </div>
@@ -170,23 +177,26 @@
         const recipeDescription = document.getElementById('recipeDescription');
         const recipeTitle = document.getElementById('recipeTitle');
         const recipeText = document.getElementById('recipeText');
+        const dietaryRequirements = document.getElementById('dietaryRequirements');
 
         const descriptions = {
-            "Crème Brûwûlée": "Crème Brûwûlée is a classic French dessert made with a rich custard base topped with a layer of caramelized sugar.",
-            "Lemowon Meringuwue Cheesecake": "Lemowon Meringuwue Cheesecake combines a tangy lemon flavor with the lightness of meringue on a rich cheesecake base.",
-            "Hjówònabandssæla": "Hjówònabandssæla is a traditional Icelandic dessert with a mix of flavors, including cinnamon and rhubarb.",
-            "Italian MascarpOwOne cake": "Mascarpone Cake is a delicate Italian dessert made with mascarpone cheese, layered with cream and fruit.",
-            "KvæfjOwOrdkake": "KvæfjOwOrdkake is a traditional cake from Norway, with layers of almonds and rich cream filling.",
-            "Prăjitură Cu Foi": "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.",
-            "Prăjitură Albă ca Zăpada": "Prăjitură Albă ca Zăpada is a traditional Romanian cake; Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.",
-            "Prăjitură": "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts."
+            "Crème Brûwûlée": {text: "Crème Brûwûlée is a classic French dessert made with a rich custard base topped with a layer of caramelized sugar.", dietary: "Gluten Free • Contains Dairy • Contains Egg"},
+            "Lemowon Meringuwue Cheesecake": {text: "Lemowon Meringuwue Cheesecake combines a tangy lemon flavor with the lightness of meringue on a rich cheesecake base.", dietary: "Potential Gluten • Contains Dairy • Contains Egg"},
+            "Hjówònabandssæla": {text: "Hjówònabandssæla is a traditional Icelandic dessert commonly served at weddings. It is similar to a biscuit in terms of texture, with a jam filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "Italian MascarpOwOne cake": {text: "Mascarpone Cake is a delicate Italian dessert made with mascarpone cheese, layered with cream and fruit.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "KvæfjOwOrdkake": {text: "KvæfjOwOrdkake is a traditional cake from Norway, with layers of almonds and rich cream filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg • Contains Nuts"},
+            "Prăjitură Cu Foi": {text: "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "Prăjitură Albă ca Zăpada": {text: "Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "Prăjitură": {text: "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts.", dietary: "Varies"}
         };
+
 
         recipeLinks.forEach(link => {
             link.addEventListener('mouseenter', function() {
                 const recipeName = this.getAttribute('data-recipe');
                 recipeTitle.textContent = recipeName;
-                recipeText.textContent = descriptions[recipeName];
+                recipeText.textContent = descriptions[recipeName].text;
+                dietaryRequirements.textContent = "Dietary requirements: " + descriptions[recipeName].dietary;
                 recipeDescription.style.display = 'block';
             });
         });
