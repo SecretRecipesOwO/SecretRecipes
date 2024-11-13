@@ -8,237 +8,176 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            display: flex;
-            background-color: #f0f0f0;
         }
-
         .container {
             display: flex;
-            flex: 1;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
+            background-color: #f0f0f0;
         }
-
-        /* Left Menu Styling */
-        .menu-container {
-            width: 250px;
+        .menu-container, .other-container {
+            display: none;
+        }
+        .menu, .other {
+            width: 16%;
+            height: 100vh;
             background-color: #333;
             color: white;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            height: 100vh;
             overflow-y: auto;
-        }
-
-        .menu-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .menu-container a {
-            display: block;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-bottom: 1px solid #444;
-            transition: background-color 0.3s;
-        }
-
-        .menu-container a:hover {
-            background-color: #444;
-        }
-
-        /* Right Menu Styling */
-        .other-container {
-            width: 250px;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            box-sizing: border-box;
             position: fixed;
             top: 0;
-            right: 0;
-            height: 100vh;
-            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
-
-        .other-container h2 {
+        .menu {
+            left: 0;
+        }
+        .other {
+            right: 0;
+        }
+        .menu h2, .other h2 {
             text-align: center;
             margin-bottom: 20px;
         }
-
-        .other-container a {
+        .menu a, .other a {
             display: block;
             color: white;
-            padding: 10px;
+            padding: 10px 0;
             text-decoration: none;
-            border-bottom: 1px solid #555;
-            transition: background-color 0.3s;
+            border-bottom: 1px solid #444;
         }
-
-        .other-container a:hover {
-            background-color: #666;
+        .menu a:hover, .other a:hover {
+            background-color: #555;
         }
-
-        /* Right content area for recipe description */
-        .content-container {
-            margin-left: 250px; /* Adjusted to leave space for the left menu */
-            margin-right: 250px; /* Adjusted to leave space for the right menu */
+        .content {
+            margin: 0 10%;
             padding: 20px;
-            width: 100%;
+            width: 80%;
         }
-
-        /* Recipe description panel */
-        .recipe-description {
-            display: none;
-            background-color: #fff;
+        .login-form {
+            background-color: white;
             padding: 20px;
-            margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .recipe-description h3 {
-            margin-top: 0;
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
         }
-
-        .dietary-requirements {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
-        /* Prăjitura Dropdown */
+        .login-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .login-form p {
+            color: red;
+            text-align: center;
+        }
+        /* Dropdown styling */
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #333;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
             border: 1px solid #444;
-            left: 100%; /* Position the dropdown to the right */
-            top: 0;
         }
-
         .dropdown-content a {
             color: white;
             padding: 10px;
             text-decoration: none;
             display: block;
         }
-
         .dropdown-content a:hover {
             background-color: #555;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- Left Menu -->
-        <div class="menu-container">
-            <h2>Menu</h2>
-            <a href="recipes/recipe1.html" class="recipe-link" data-recipe="Crème Brûwûlée">Crème Brûwûlée</a>
-            <a href="recipes/recipe2.html" class="recipe-link" data-recipe="Lemowon Meringuwue Cheesecake">Lemowon Meringuwue Cheesecake</a>
-            <a href="recipes/recipe3.html" class="recipe-link" data-recipe="Hjówònabandssæla">Hjówònabandssæla</a>
-            <a href="recipes/recipe4.html" class="recipe-link" data-recipe="Italian MascarpOwOne cake">Italian Mixed Berry Mascarpone Cake</a>
-            <a href="recipes/recipe5.html" class="recipe-link" data-recipe="KvæfjOwOrdkake">KvæfjOwOrdkake</a>
-            <a href="#" class="recipe-link" data-recipe="Prăjitură" id="prajituraLink">Prăjitură</a>
+        <div class="login-form" id="loginForm">
+            <h2>Login</h2>
+            <form id="passwordForm">
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="submit" value="Submit">
+                <p id="result"></p>
+            </form>
         </div>
-
-        <!-- Right Menu -->
-        <div class="other-container">
+    </div>
+    <div class="menu-container">
+        <div class="menu">
+            <h2>Menu</h2>
+            <a href="recipes/recipe1.html">Crème Brûwûlée</a>
+            <a href="recipes/recipe2.html">Lemowon Meringuwue Cheesecake</a>
+            <a href="recipes/recipe3.html">Hjówònabandssæla</a>
+            <a href="recipes/recipe4.html">Italian Mixed Berry Mascarpowone Cake</a>
+            <a href="recipes/recipe5.html">KvæfjOwOrdkake</a>
+            <a href="#" id="prajituraLink">PrăjitUwUră</a>
+        </div>
+    </div>
+    <div class="other-container">
+        <div class="other">
             <h2>Other</h2>
             <a href="additional/fluid-item-weight.html">Fluid Weights</a>
             <a href="additional/solid-item-weight.html">Solid Weights</a>
             <a href="additional/my-socials.html">My Socials :3</a>
-            <a href="Ingredient-Search/Ingredient-Search.html">Ingredients :3</a>
-        </div>
-
-        <!-- Right Content Area for Recipe Description -->
-        <div class="content-container">
-            <div id="recipeDescription" class="recipe-description">
-                <h3 id="recipeTitle">Recipe Title</h3>
-                <p id="recipeText">Hover over a recipe to see the description.</p>
-                <p id="dietaryRequirements" class="dietary-requirements">Dietary requirements: N/A</p>
-            </div>
         </div>
     </div>
-
     <!-- Dropdown Menu for Prăjitură -->
     <div class="dropdown-content" id="prajituraDropdown">
-        <a href="recipes/recipe6.html" class="recipe-link" data-recipe="Prăjitură Cu Foi">Prăjitură cUwU Foi</a>
-        <a href="recipes/recipe7.html" class="recipe-link" data-recipe="Prăjitură Albă ca Zăpada">Prăjitură Albă ca Zăpada</a>
+        <a href="recipes/recipe6.html">Prăjitură cUwU Foi</a>
+        <a href="recipes/recipe7.html">PrăjitUwUră Albă ca Zăpada</a>
     </div>
-
     <script>
-        const recipeLinks = document.querySelectorAll('.recipe-link');
-        const recipeDescription = document.getElementById('recipeDescription');
-        const recipeTitle = document.getElementById('recipeTitle');
-        const recipeText = document.getElementById('recipeText');
-        const dietaryRequirements = document.getElementById('dietaryRequirements');
-
-        const descriptions = {
-            "Crème Brûwûlée": {text: "Crème Brûwûlée is a classic French dessert made with a rich custard base topped with a layer of caramelized sugar.", dietary: "Gluten Free • Contains Dairy • Contains Egg"},
-            "Lemowon Meringuwue Cheesecake": {text: "Lemowon Meringuwue Cheesecake combines a tangy lemon flavor with the lightness of meringue on a rich cheesecake base.", dietary: "Potential Gluten • Contains Dairy • Contains Egg"},
-            "Hjówònabandssæla": {text: "Hjówònabandssæla is a traditional Icelandic dessert commonly served at weddings. It is similar to a biscuit in terms of texture, with a jam filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Italian MascarpOwOne cake": {text: "Mascarpone Cake is a delicate Italian dessert made with mascarpone cheese, layered with cream and fruit.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "KvæfjOwOrdkake": {text: "KvæfjOwOrdkake is a traditional cake from Norway, with layers of almonds and rich cream filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg • Contains Nuts"},
-            "Prăjitură Cu Foi": {text: "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Prăjitură Albă ca Zăpada": {text: "Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Prăjitură": {text: "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts.", dietary: "Varies"}
-        };
-
-
-        recipeLinks.forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                const recipeName = this.getAttribute('data-recipe');
-                recipeTitle.textContent = recipeName;
-                recipeText.textContent = descriptions[recipeName].text;
-                dietaryRequirements.textContent = "Dietary requirements: " + descriptions[recipeName].dietary;
-                recipeDescription.style.display = 'block';
-            });
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            document.getElementById('loginForm').style.display = 'none';
+            document.querySelector('.menu-container').style.display = 'flex';
+            document.querySelector('.other-container').style.display = 'flex';
+        }
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var password = document.getElementById('password').value;
+            var result = document.getElementById('result');
+            if (password === 'I Am Gay') {
+                localStorage.setItem('isLoggedIn', 'true');
+                document.getElementById('loginForm').style.display = 'none';
+                document.querySelector('.menu-container').style.display = 'flex';
+                document.querySelector('.other-container').style.display = 'flex';
+            } else {
+                result.textContent = 'Incorrect password. Please try again.';
+            }
         });
 
-        // Hide description when mouse leaves the menu or link
-        recipeLinks.forEach(link => {
-            link.addEventListener('mouseleave', function() {
-                recipeDescription.style.display = 'none';
-            });
+        document.getElementById('prajituraLink').addEventListener('mouseenter', function() {
+            const dropdown = document.getElementById('prajituraDropdown');
+            const linkRect = this.getBoundingClientRect();
+            dropdown.style.display = 'block';
+            dropdown.style.top = `${linkRect.top}px`;
+            dropdown.style.left = `${linkRect.right}px`;
         });
 
-        const prajituraLink = document.getElementById('prajituraLink');
-        const prajituraDropdown = document.getElementById('prajituraDropdown');
-
-        let prajituraDropdownVisible = false;
-
-        prajituraLink.addEventListener('mouseenter', function() {
-            const linkRect = prajituraLink.getBoundingClientRect();
-            prajituraDropdown.style.display = 'block';
-            prajituraDropdown.style.top = `${linkRect.top}px`;
-            prajituraDropdown.style.left = `${linkRect.right}px`;
-            prajituraDropdownVisible = true;
+        document.getElementById('prajituraDropdown').addEventListener('mouseleave', function() {
+            this.style.display = 'none';
         });
-
-        prajituraLink.addEventListener('mouseleave', function(event) {
+        document.getElementById('prajituraLink').addEventListener('mouseleave', function(event) {
             setTimeout(() => {
-                if (!prajituraDropdownVisible || !event.relatedTarget || !event.relatedTarget.closest('#prajituraDropdown')) {
-                    prajituraDropdown.style.display = 'none';
-                    prajituraDropdownVisible = false;
+                if (!event.relatedTarget || !event.relatedTarget.closest('#prajituraDropdown')) {
+                    document.getElementById('prajituraDropdown').style.display = 'none';
                 }
             }, 50);
         });
-
-        prajituraDropdown.addEventListener('mouseenter', function() {
-            prajituraDropdownVisible = true;
-        });
-
-        prajituraDropdown.addEventListener('mouseleave', function() {
-            prajituraDropdown.style.display = 'none';
-            prajituraDropdownVisible = false;
-        });
-
     </script>
 </body>
 </html>
