@@ -145,6 +145,7 @@
             <a href="recipes/recipe4.html" class="recipe-link" data-recipe="Italian MascarpOwOne cake">Italian Mixed Berry Mascarpone Cake</a>
             <a href="recipes/recipe5.html" class="recipe-link" data-recipe="KvæfjOwOrdkake">KvæfjOwOrdkake</a>
             <a href="#" class="recipe-link" data-recipe="Prăjitură" id="prajituraLink">Prăjitură</a>
+            <a href="recipes/recipe8.html" class="recipe-link" data-recipe="Shortbread">Shortbread</a>
         </div>
 
         <!-- Right Menu -->
@@ -171,7 +172,24 @@
         <a href="recipes/recipe6.html" class="recipe-link" data-recipe="Prăjitură Cu Foi">Prăjitură cUwU Foi</a>
         <a href="recipes/recipe7.html" class="recipe-link" data-recipe="Prăjitură Albă ca Zăpada">Prăjitură Albă ca Zăpada</a>
     </div>
-
+    <script>
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            document.getElementById('loginForm').style.display = 'none';
+            document.querySelector('.menu-container').style.display = 'flex';
+        }
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var password = document.getElementById('password').value;
+            var result = document.getElementById('result');
+            if (password === 'I Am Fag') {
+                localStorage.setItem('isLoggedIn', 'true');
+                document.getElementById('loginForm').style.display = 'none';
+                document.querySelector('.menu-container').style.display = 'flex';
+            } else {
+                result.textContent = 'Incorrect password. Please try again.';
+            }
+        });
+    </script>
     <script>
         const recipeLinks = document.querySelectorAll('.recipe-link');
         const recipeDescription = document.getElementById('recipeDescription');
@@ -187,7 +205,8 @@
             "KvæfjOwOrdkake": {text: "KvæfjOwOrdkake is a traditional cake from Norway, with layers of almonds and rich cream filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg • Contains Nuts"},
             "Prăjitură Cu Foi": {text: "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
             "Prăjitură Albă ca Zăpada": {text: "Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Prăjitură": {text: "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts.", dietary: "Varies"}
+            "Prăjitură": {text: "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts.", dietary: "Varies"},
+            "Shortbread": {text: "Shortbtead is a traditional Scottish biscuit dating back to the 12th century, often containing no leavening agent.", dietary: "Contains Gluten • Contains Dairy"}
         };
 
 
