@@ -13,7 +13,7 @@
         }
 
         .container {
-            display: flex;
+            display: none; /* Hidden until login */
             flex: 1;
             height: 100vh;
         }
@@ -48,6 +48,36 @@
             background-color: #444;
         }
 
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: #444;
+            padding: 10px;
+            border: 1px solid #555;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #555;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         /* Right Menu Styling */
         .other-container {
             width: 250px;
@@ -62,33 +92,13 @@
             overflow-y: auto;
         }
 
-        .other-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .other-container a {
-            display: block;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-bottom: 1px solid #555;
-            transition: background-color 0.3s;
-        }
-
-        .other-container a:hover {
-            background-color: #666;
-        }
-
-        /* Right content area for recipe description */
         .content-container {
-            margin-left: 250px; /* Adjusted to leave space for the left menu */
-            margin-right: 250px; /* Adjusted to leave space for the right menu */
+            margin-left: 250px;
+            margin-right: 250px;
             padding: 20px;
-            width: 100%;
+            flex: 1;
         }
 
-        /* Recipe description panel */
         .recipe-description {
             display: none;
             background-color: #fff;
@@ -108,33 +118,79 @@
             margin-top: 10px;
         }
 
-        /* Prăjitura Dropdown */
-        .dropdown-content {
-            display: none;
-            position: absolute;
+        /* Login Form Styling */
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
             background-color: #333;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            border: 1px solid #444;
-            left: 100%; /* Position the dropdown to the right */
-            top: 0;
-        }
-
-        .dropdown-content a {
             color: white;
-            padding: 10px;
-            text-decoration: none;
-            display: block;
         }
 
-        .dropdown-content a:hover {
+        #loginForm h2 {
+            margin-bottom: 20px;
+        }
+
+        #loginForm input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        #loginForm button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+        }
+
+        #loginForm button:hover {
             background-color: #555;
+        }
+
+        #result {
+            margin-top: 10px;
+            color: #ff6666;
+        }
+
+        /* Other. */
+        #iframe-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            height: 475px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
+    <!-- Login Form -->
+    <div id="loginForm">
+        <h2>Log In</h2>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="Enter password" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="result"></p>
+    </div>
 
+    <!-- Main Content -->
     <div class="container">
         <!-- Left Menu -->
         <div class="menu-container">
@@ -142,22 +198,30 @@
             <a href="recipes/recipe1.html" class="recipe-link" data-recipe="Crème Brûwûlée">Crème Brûwûlée</a>
             <a href="recipes/recipe2.html" class="recipe-link" data-recipe="Lemowon Meringuwue Cheesecake">Lemowon Meringuwue Cheesecake</a>
             <a href="recipes/recipe3.html" class="recipe-link" data-recipe="Hjówònabandssæla">Hjówònabandssæla</a>
-            <a href="recipes/recipe4.html" class="recipe-link" data-recipe="Italian MascarpOwOne cake">Italian Mixed Berry Mascarpone Cake</a>
+            <a href="recipes/recipe4.html" class="recipe-link" data-recipe="Italian MascarpOwOne cake">Italian MascarpOwOne cake</a>
             <a href="recipes/recipe5.html" class="recipe-link" data-recipe="KvæfjOwOrdkake">KvæfjOwOrdkake</a>
-            <a href="#" class="recipe-link" data-recipe="Prăjitură" id="prajituraLink">Prăjitură</a>
-            <a href="recipes/recipe8.html" class="recipe-link" data-recipe="Shortbread">Shortbread</a>
+            
+            <div class="dropdown">
+                <a href="#" class="recipe-link" data-recipe="Prăjitură" id="prajituraLink">Prăjitură</a>
+                <div class="dropdown-content">
+                    <a href="recipes/recipe6.html" class="recipe-link" data-recipe="Prăjitură Cu Foi">Prăjitură cUwU Foi</a>
+                    <a href="recipes/recipe7.html" class="recipe-link" data-recipe="Prăjitură Albă ca Zăpada">Prăjitură Albă ca Zăpada</a>
+                </div>
+            </div>
+
+            <a href="recipes/recipe8.html" class="recipe-link" data-recipe="ShOwOrtbread">Shortbread</a>
         </div>
 
         <!-- Right Menu -->
-        <div class="other-container">
+        <div class="menu-container other-container">
             <h2>Other</h2>
-            <a href="additional/fluid-item-weight.html">Fluid Weights</a>
-            <a href="additional/solid-item-weight.html">Solid Weights</a>
-            <a href="additional/my-socials.html">My Socials :3</a>
-            <a href="Ingredient-Search/Ingredient-Search.html">Ingredients :3</a>
+                <a href="additional/fluid-item-weight.html">Fluid Weights</a>
+                <a href="additional/solid-item-weight.html">Solid Weights</a>
+                <a href="additional/my-socials.html">My Socials :3</a>
+                <a href="Ingredient-Search/Ingredient-Search.html">Ingredients :3</a>
         </div>
 
-        <!-- Right Content Area for Recipe Description -->
+        <!-- Content Area -->
         <div class="content-container">
             <div id="recipeDescription" class="recipe-description">
                 <h3 id="recipeTitle">Recipe Title</h3>
@@ -167,30 +231,33 @@
         </div>
     </div>
 
-    <!-- Dropdown Menu for Prăjitură -->
-    <div class="dropdown-content" id="prajituraDropdown">
-        <a href="recipes/recipe6.html" class="recipe-link" data-recipe="Prăjitură Cu Foi">Prăjitură cUwU Foi</a>
-        <a href="recipes/recipe7.html" class="recipe-link" data-recipe="Prăjitură Albă ca Zăpada">Prăjitură Albă ca Zăpada</a>
+    <!-- Embed Interactive Map -->
+    <div id="iframe-container">
+        <iframe src="https://www.zeemaps.com/view?group=5145909&x=64.634271&y=36.417656&z=15"></iframe>
     </div>
+
     <script>
+        // Handle Login
         if (localStorage.getItem('isLoggedIn') === 'true') {
             document.getElementById('loginForm').style.display = 'none';
-            document.querySelector('.menu-container').style.display = 'flex';
+            document.querySelector('.container').style.display = 'flex';
         }
+
         document.getElementById('passwordForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            var password = document.getElementById('password').value;
-            var result = document.getElementById('result');
+            const password = document.getElementById('password').value;
+            const result = document.getElementById('result');
+
             if (password === 'I Am Fag') {
                 localStorage.setItem('isLoggedIn', 'true');
                 document.getElementById('loginForm').style.display = 'none';
-                document.querySelector('.menu-container').style.display = 'flex';
+                document.querySelector('.container').style.display = 'flex';
             } else {
                 result.textContent = 'Incorrect password. Please try again.';
             }
         });
-    </script>
-    <script>
+
+        // Recipe Description Handling
         const recipeLinks = document.querySelectorAll('.recipe-link');
         const recipeDescription = document.getElementById('recipeDescription');
         const recipeTitle = document.getElementById('recipeTitle');
@@ -201,63 +268,27 @@
             "Crème Brûwûlée": {text: "Crème Brûwûlée is a classic French dessert made with a rich custard base topped with a layer of caramelized sugar.", dietary: "Gluten Free • Contains Dairy • Contains Egg"},
             "Lemowon Meringuwue Cheesecake": {text: "Lemowon Meringuwue Cheesecake combines a tangy lemon flavor with the lightness of meringue on a rich cheesecake base.", dietary: "Potential Gluten • Contains Dairy • Contains Egg"},
             "Hjówònabandssæla": {text: "Hjówònabandssæla is a traditional Icelandic dessert commonly served at weddings. It is similar to a biscuit in terms of texture, with a jam filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Italian MascarpOwOne cake": {text: "Mascarpone Cake is a delicate Italian dessert made with mascarpone cheese, layered with cream and fruit.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "Italian MascarpOwOne cake": {text: "Italian MascarpOwOne cake is a delicate Italian dessert made with mascarpone cheese, layered with cream and fruit.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
             "KvæfjOwOrdkake": {text: "KvæfjOwOrdkake is a traditional cake from Norway, with layers of almonds and rich cream filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg • Contains Nuts"},
-            "Prăjitură Cu Foi": {text: "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
-            "Prăjitură Albă ca Zăpada": {text: "Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
             "Prăjitură": {text: "Prăjitură is the Romanian term for a cake or pastry, often used to describe a wide variety of traditional layered desserts.", dietary: "Varies"},
+            "Prăjitură Cu Foi":{text: "Prăjitură Cu Foi is a Romanian cake, consisting of layers of thin, baked dough, and a rich and sweet filling.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
+            "Prăjitură Albă ca Zăpada": {text: "Prăjitură Albă ca Zăpada is a variant of Prăjitură Cu Foi, with softer hints of Lemon and Coconut.", dietary: "Contains Gluten • Contains Dairy • Contains Egg"},
             "Shortbread": {text: "Shortbread is a traditional Scottish biscuit dating back to the 12th century, often containing no leavening agent.", dietary: "Contains Gluten • Contains Dairy"}
         };
 
-
         recipeLinks.forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                const recipeName = this.getAttribute('data-recipe');
+            link.addEventListener('mouseenter', () => {
+                const recipeName = link.getAttribute('data-recipe');
                 recipeTitle.textContent = recipeName;
-                recipeText.textContent = descriptions[recipeName].text;
-                dietaryRequirements.textContent = "Dietary requirements: " + descriptions[recipeName].dietary;
+                recipeText.textContent = descriptions[recipeName]?.text || "Description not available.";
+                dietaryRequirements.textContent = "Dietary requirements: " + (descriptions[recipeName]?.dietary || "N/A");
                 recipeDescription.style.display = 'block';
             });
-        });
 
-        // Hide description when mouse leaves the menu or link
-        recipeLinks.forEach(link => {
-            link.addEventListener('mouseleave', function() {
+            link.addEventListener('mouseleave', () => {
                 recipeDescription.style.display = 'none';
             });
         });
-
-        const prajituraLink = document.getElementById('prajituraLink');
-        const prajituraDropdown = document.getElementById('prajituraDropdown');
-
-        let prajituraDropdownVisible = false;
-
-        prajituraLink.addEventListener('mouseenter', function() {
-            const linkRect = prajituraLink.getBoundingClientRect();
-            prajituraDropdown.style.display = 'block';
-            prajituraDropdown.style.top = `${linkRect.top}px`;
-            prajituraDropdown.style.left = `${linkRect.right}px`;
-            prajituraDropdownVisible = true;
-        });
-
-        prajituraLink.addEventListener('mouseleave', function(event) {
-            setTimeout(() => {
-                if (!prajituraDropdownVisible || !event.relatedTarget || !event.relatedTarget.closest('#prajituraDropdown')) {
-                    prajituraDropdown.style.display = 'none';
-                    prajituraDropdownVisible = false;
-                }
-            }, 50);
-        });
-
-        prajituraDropdown.addEventListener('mouseenter', function() {
-            prajituraDropdownVisible = true;
-        });
-
-        prajituraDropdown.addEventListener('mouseleave', function() {
-            prajituraDropdown.style.display = 'none';
-            prajituraDropdownVisible = false;
-        });
-
     </script>
 </body>
 </html>
